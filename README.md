@@ -90,12 +90,12 @@ Repository: https://github.com/rachitasalaria2000/crystal-ball-approvals
 
 The repository is private. Invite the HR/reviewer's GitHub account under Settings → Collaborators before sharing the link. No submission message has been sent. Source files were uploaded through GitHub's browser interface because this computer's Git credential store was unavailable. The original local commit history is preserved in `git-history.bundle`; run `git clone git-history.bundle crystal-ball-with-history` to review it. Browser upload commits represent publication, not test-first development evidence.
 
-For later local pushes after configuring Git authentication:
+For later changes, clone the published repository after configuring Git authentication. Its browser publication commits differ from the original development history in the bundle, so use this fresh checkout for future pushes:
 
 ```powershell
-git branch -M main
-git remote add origin https://github.com/rachitasalaria2000/crystal-ball-approvals.git
-git push -u origin main
+git clone https://github.com/rachitasalaria2000/crystal-ball-approvals.git crystal-ball-published
+cd crystal-ball-published
+# Make changes, then git add, git commit, and git push.
 ```
 
 Confirm `.env` is ignored, run the live-key checklist in REQUIREMENTS.md, and send your repository URL with this README through the original assignment channel. A video is optional.
