@@ -88,7 +88,7 @@ The first local commit separates contracts and initial tests from implementation
 
 Repository: https://github.com/rachitasalaria2000/crystal-ball-approvals
 
-The repository is private. Invite the HR/reviewer's GitHub account under Settings → Collaborators before sharing the link. No submission message has been sent. Source files were uploaded through GitHub's browser interface because this computer's Git credential store was unavailable. The original local commit history is preserved in `git-history.bundle`; run `git clone git-history.bundle crystal-ball-with-history` to review it. Browser upload commits represent publication, not test-first development evidence.
+The repository is public. HR and reviewers can open the repository link without a collaborator invitation. No submission message has been sent. Source files were uploaded through GitHub's browser interface because this computer's Git credential store was unavailable. The original local commit history is preserved in `git-history.bundle`; run `git clone git-history.bundle crystal-ball-with-history` to review it. Browser upload commits represent publication, not test-first development evidence.
 
 For later changes, clone the published repository after configuring Git authentication. Its browser publication commits differ from the original development history in the bundle, so use this fresh checkout for future pushes:
 
