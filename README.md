@@ -42,7 +42,7 @@ For browser checks, run the app in a second terminal **without an API key**, the
 
 ## Requirement coverage
 
-See [REQUIREMENTS.md](REQUIREMENTS.md) for the assignment mapping, assumptions, and review checklist; [TEST-REPORT.md](TEST-REPORT.md) for verified checks and limits; and [INTERVIEW-NOTES.md](INTERVIEW-NOTES.md) for an explanation you can rehearse.
+See [REQUIREMENTS.md](REQUIREMENTS.md) for the assignment mapping, assumptions, and review checklist, and [TEST-REPORT.md](TEST-REPORT.md) for verified checks and limits.
 
 ## Architecture and API
 
@@ -80,7 +80,7 @@ Every operation has an eight-second deadline and cancels provider work on expiry
 
 ## Test-first evidence and AI tool disclosure
 
-Codex assisted with assignment analysis, code, test drafting, debugging, and documentation. Review and understand the implementation before presenting it in your interview. No claim is made that this was independently authored without AI.
+AI tool usage: Codex assisted with assignment analysis, implementation, tests, debugging, and documentation.
 
 The first local commit separates contracts and initial tests from implementation, but the initial tests were first executed after dependency installation and implementation files existed in the working tree. It is a review snapshot, not proof of strict test-first execution for the whole project. The later default-Help regression was actually run failing (zero retrieved chunks), committed as a test, then fixed and rerun passing. Do not present the initial snapshot as stronger evidence than it is. See TEST-REPORT.md for the recorded failure.
 
