@@ -44,23 +44,6 @@ For browser checks, run the app in a second terminal **without an API key**, the
 
 See [REQUIREMENTS.md](REQUIREMENTS.md) for the assignment mapping, assumptions, and review checklist, and [TEST-REPORT.md](TEST-REPORT.md) for verified checks and limits.
 
-## Architecture and API
-
-```text
-React / Next.js → Zustand session state → POST /api/assistant
-  → Zod request validation → per-session + per-IP limits
-  → versioned prompt + queue + retrieved policy
-  → Claude SDK, server only → Zod SSE events → React
-```
-
-`contracts/assistant.ts` defines requests, summary output, and every SSE event. POST JSON accepts `action` (summary/talk/help/teach/greeting), `message` (up to 2000 characters), `language` (English/Hindi/Spanish), and up to twelve role/content history messages. The client sends up to ten prior messages. Invalid input returns JSON 400; throttling returns JSON 429 with rate-limit headers. AI failure is SSE 200 with an explicit fallback event and a done event. `GET /api/health` reports status and whether a key exists, never the key.
-
-Events use `data: {JSON}\n\n`: `sources`, `summary`, `delta`, `fallback`, `done`. Both server and client validate event schemas. Summary generation uses a forced Claude tool with a JSON schema; Zod checks exact IDs, uniqueness, count, priority values, and bounded text. Only then is the summary sent to the UI. A second genuine Claude request narrates the validated summary with provider text deltas. Other actions stream provider text deltas directly. The entire operation, including both summary calls, shares one 8000 ms wall-clock deadline; SDK retries are disabled. There may be a short validation wait before summary narration begins. No artificial token replay is used.
-
-The 200–400 word policy is authored in `data/policy.ts`, split into five chunks. Keyword-overlap retrieval selects up to three excerpts with stable citation IDs; the UI exposes the source text. Unrelated queries retrieve no chunks. Help prompts restrict answers to those excerpts. Retrieval is intentionally English keyword based: multilingual generation is supported, but multilingual retrieval quality is a documented limitation. Prompt instructions reduce hallucination risk; they do not mathematically guarantee semantic grounding.
-
-History lives in browser memory via Zustand; it resets on reload. It is bounded before being sent. No permanent history or external database is needed for the supplied fixture. Session throttling uses a server-issued HttpOnly, SameSite cookie, ten requests per minute, plus sixty per IP to bound cookie resets. Stores are process-local and not suitable for multiple instances. Client disconnects cancel generation. React renders text without raw HTML. Read aloud uses optional browser speech synthesis and depends on installed voices.
-
 ## Framework references
 
 - [Next.js installation and runtime requirements](https://nextjs.org/docs/app/getting-started/installation)
